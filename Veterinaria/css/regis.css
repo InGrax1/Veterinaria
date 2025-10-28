@@ -1,0 +1,95 @@
+/* Solución al scroll horizontal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dab6fc, #a785f3);
+    animation: gradientMove 6s infinite alternate;
+}
+
+/* Animación del fondo */
+@keyframes gradientMove {
+    0% { background: linear-gradient(135deg, #dab6fc, #a785f3); }
+    100% { background: linear-gradient(135deg, #a785f3, #dab6fc); }
+}
+
+/* Burbujas flotantes */
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: floatBubbles 8s infinite alternate;
+}
+
+/* Animación de las burbujas */
+@keyframes floatBubbles {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-200px) scale(1.2); }
+}
+
+/* Contenedor de registro más ancho */
+.register-container {
+    background: rgba(230, 200, 255, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 380px; /* Más ancho */
+    max-width: 90%;
+    min-height: 350px; /* Menos alto */
+}
+
+/* Inputs alineados */
+.input {
+    width: 90%;
+    padding: 12px;
+    margin: 6px auto;
+    display: block;
+    border: 1px solid #a785f3;
+    border-radius: 8px;
+}
+
+/* Botón centrado correctamente */
+.btn {
+    width: 90%;
+    margin: 15px auto;
+    padding: 12px;
+    background: #a785f3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #dab6fc;
+}
+
+/* Enlace ajustado */
+.register-container p {
+    margin: 10px 0 0;
+}
+
+/* Pie de página fijo */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

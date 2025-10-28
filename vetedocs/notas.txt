@@ -1,0 +1,51 @@
+Página				Función
+index_vet.php			Página de inicio de sesión para veterinarios.
+home_vet.php			Panel principal tras iniciar sesión.
+pacientes_hoy.php		Lista de mascotas con citas del día de hoy, con botón “Atender”.
+atender.php5			Página para crear historial clínico desde la cita.
+crear_receta.php		Página para generar la receta.
+agendar_siguiente.php		Página para agendar la próxima cita del pacien
+
+veterinarios.php		Lista todos los veterinarios registrados (nombre, especialidad, etc.).
+registrar_veterinario.php	Formulario para registrar nuevos veterinarios.
+editar_veterinario.php		Formulario para editar un veterinario (nombre, especialidad, etc.).
+
+
+
+
+
+
+
+
+
+
+
+
+
+vetedocs/
+│
+├── includes/                ← Archivos PHP comunes (conexión DB, headers, etc.)
+│   ├── scriptdb.php
+│   ├── header.php
+│   └── footer.php
+│
+├── css/                     ← Hojas de estilo
+│   └── estilo_vet.css
+│
+├── auth/                    ← Páginas de login y validación
+│   └── index_vet.php
+│   └── validar_vet.php
+│
+├── dashboard/               ← Páginas principales tras login
+│   └── home_vet.php
+│   └── pacientes_hoy.php
+│   └── atender.php
+│   └── crear_receta.php
+│   └── agendar_siguiente.php
+│
+├── veterinarios/            ← CRUD de veterinarios
+│   └── veterinarios.php
+│   └── registrar_veterinario.php
+│   └── editar_veterinario.php
+│
+└── logout.php               ← Cierra sesión

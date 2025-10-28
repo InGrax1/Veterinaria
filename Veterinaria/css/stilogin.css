@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Evita que las burbujas salgan de la pantalla */
+    display: flex;
+    flex-direction: column; /* Para acomodar bien el footer */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #dab6fc, #a785f3);
+    animation: gradientMove 60s infinite alternate;
+}
+
+
+/* Animación del fondo */
+@keyframes gradientMove {
+    0% { background: linear-gradient(135deg, #dab6fc, #a785f3); }
+    100% { background: linear-gradient(135deg, #a785f3, #dab6fc); }
+}
+
+/* Burbujas flotantes */
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: floatBubbles 8s infinite alternate;
+}
+
+
+/* Animación de las burbujas */
+@keyframes floatBubbles {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-200px) scale(1.2); }
+}
+
+/* Login container con color similar al fondo */
+.login-container {
+    background: rgba(230, 200, 255, 0.8); /* Color con transparencia similar al fondo */
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Centramos correctamente los inputs */
+.input {
+    width: calc(100% - 20px); /* Asegura que los inputs no queden pegados al borde */
+    padding: 10px;
+    margin: 10px auto;
+    display: block; /* Para que estén alineados verticalmente */
+    border: 1px solid #a785f3;
+    border-radius: 8px;
+}
+
+.input:focus {
+    border-color: #a785f3;
+    box-shadow: 0px 0px 8px rgba(167, 133, 243, 0.6);
+}
+
+.btn {
+    background: #a785f3;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #dab6fc;
+}
+
+
+
+
+/* Pie de página */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: black;
+    padding: 10px;
+}
+
