@@ -1,4 +1,17 @@
-/* Reset general */
+/* --- Variables y Estilos Globales --- */
+:root {
+    --color-primary: #f09e2b; /* Naranja principal */
+    --color-text: #555;
+    --color-text-dark: #111;
+    --color-bg-light: #fafafa;
+    --color-bg-white: #ffffff;
+    --border-radius-main: 12px;
+    --color-danger: #d9534f;
+    --color-danger-hover: #c9302c;
+    --color-success: #5cb85c;
+    --color-warning: #f0ad4e;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,163 +19,255 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #ededf2, #fcf9d8);
-    overflow-x: hidden;
-    padding-bottom: 60px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg-light); /* Fondo gris claro */
+    color: var(--color-text);
+    line-height: 1.6;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header */
-.header {
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Estilo del Header (Copiado) --- */
+.site-header {
+    background: var(--color-bg-white);
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.site-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #00ccbe;
-    padding: 10px 20px;
-    color: white;
 }
-
 .logo {
-    width: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+.logo-icon {
+    font-size: 24px;
+    color: var(--color-primary);
 }
 
-/* Barra de navegación */
+/* --- Estilo de Navegación (Copiado) --- */
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 10px;
 }
-
-.nav-menu li {
+.nav-menu li a,
+.dropbtn {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.nav-menu li a:hover,
+.dropbtn:hover {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+}
+.dropdown {
     position: relative;
 }
-
-.nav-menu li a, .dropbtn {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 10px 15px;
+.dropbtn {
     background: none;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    height: 40px;
+    font-family: inherit;
+    font-size: 16px;
 }
-
-.nav-menu li a:hover,
-.dropbtn:hover {
-    color: #f5f1e8;
-}
-
-/* Menú desplegable */
 .dropdown-content {
+    display: none;
     position: absolute;
-    background: #80bc96;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    right: -20px;
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    right: 0;
+    top: 100%;
+    background: var(--color-bg-white);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-main);
+    z-index: 10;
+    overflow: hidden;
 }
-
 .dropdown-content a {
-    color: white;
+    color: var(--color-text);
     padding: 12px 16px;
-    text-decoration: none;
     display: block;
-}
-
-.dropdown-content a:hover {
-    background: #a6c88c;
-}
-
-.dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* Contenido principal */
-.main-content {
-    padding: 40px 20px;
-}
-
-/* Título */
-h2 {
-    text-align: center;
-    color: #47a3a0;
-    margin-bottom: 20px;
-}
-
-/* Tabla de citas */
-table {
-    width: 80%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-table th, table td {
-    border: 1px solid #ccc;
-    padding: 12px;
-    text-align: center;
-}
-
-table th {
-    background-color: #37ab98;
-    color: white;
-}
-
-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Botón cancelar */
-.btn-cancelar {
-    background-color: #f44336;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-cancelar:hover {
-    background-color: #d32f2f;
-}
-
-/* Enlace de regreso */
-a.volver {
-    display: block;
-    width: fit-content;
-    margin: 20px auto;
-    text-align: center;
-    color: #4caf50;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-a.volver:hover {
-    color: #2e7d32;
-}
-
-/* Footer */
-.footer {
-    position: fixed;
-    bottom: 0;
+    border-radius: 0;
     width: 100%;
-    background: #00CCBE;
+}
+/* Regla de hover para opciones normales (corregida con :not) */
+.dropdown-content a:not(.logout):hover {
+    background-color: var(--color-primary);
     color: white;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Regla para Logout */
+.dropdown-content a.logout {
+    color: var(--color-danger);
+}
+.dropdown-content a.logout:hover {
+    background: var(--color-danger);
+    color: white;
+}
+
+/* --- Contenido de la Página --- */
+.page-content {
+    flex-grow: 1;
+    padding: 40px 0;
+}
+
+.table-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: var(--color-bg-white);
+    padding: 30px;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
-    padding: 10px;
+}
+
+.table-container h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    margin-bottom: 25px;
+}
+
+/* --- Estilo de la Tabla --- */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Para responsividad en móviles */
+}
+
+.citas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    text-align: left;
+}
+
+.citas-table th {
+    background-color: var(--color-bg-light);
+    font-weight: 600;
+    color: var(--color-text-dark);
+    padding: 12px 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.citas-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.citas-table tbody tr:hover {
+    background-color: var(--color-bg-light);
+}
+
+/* --- Estilos de Celdas (Botón, Estado) --- */
+.btn-cancelar {
+    background-color: var(--color-danger);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-cancelar:hover {
+    background-color: var(--color-danger-hover);
+}
+
+.ya-atendida {
+    color: #999;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.estado-cita {
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: white;
+}
+.estado-esperando {
+    background-color: var(--color-warning);
+}
+.estado-atendiendo {
+    background-color: var(--color-primary);
+}
+.estado-atendida {
+    background-color: var(--color-success);
+}
+
+/* --- Mensajes y Botones Extra --- */
+.no-citas-message {
+    font-size: 16px;
+    color: var(--color-text);
+    padding: 30px 0;
+}
+
+.btn-secondary {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+    background: var(--color-bg-white);
+    color: var(--color-text-dark);
+}
+.btn-secondary:hover {
+    background: var(--color-bg-light);
+    border-color: #ccc;
+}
+
+/* --- Footer (Copiado) --- */
+.site-footer {
+    padding: 40px 0;
+    background: var(--color-bg-white);
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: auto;
+}
+.site-footer p {
+    margin: 5px 0;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+    .site-header .container, .nav-menu, .dropdown {
+        width: 100%;
+        flex-direction: column;
+    }
+    .site-header .container { gap: 15px; }
+    .nav-menu li { width: 100%; text-align: center; }
+    .dropdown-content { position: static; box-shadow: none; }
+    
+    .table-container {
+        padding: 20px;
+    }
+    /* El .table-wrapper se encargará del scroll horizontal */
 }

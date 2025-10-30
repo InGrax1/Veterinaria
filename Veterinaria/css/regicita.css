@@ -1,4 +1,13 @@
-/* Reset general */
+/* --- Variables y Estilos Globales --- */
+:root {
+    --color-primary: #f09e2b; /* Naranja principal */
+    --color-text: #555;
+    --color-text-dark: #111;
+    --color-bg-light: #fafafa;
+    --color-bg-white: #ffffff;
+    --border-radius-main: 12px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,200 +15,331 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #a785f3, #BBDEFB); /* Fondo azul suave */
-    overflow-x: hidden;
-    padding-bottom: 60px;
-    min-height: 100vh
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg-light); /* Fondo gris claro */
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header */
-.header {
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Estilo del Header (Copiado de inicio.css) --- */
+.site-header {
+    background: var(--color-bg-white);
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.site-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #1565C0;
-    padding: 16px;
-    color: white;
 }
 
 .logo {
-    width: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
 }
 
-/* Barra de navegación */
+.logo-icon {
+    font-size: 24px;
+    color: var(--color-primary);
+}
+
+/* --- Estilo de Navegación (Copiado de inicio.css) --- */
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 15px;
-}
-
-.nav-menu li {
-    position: relative;
-}
-
-.nav-menu li a, .dropbtn {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 10px 15px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-    display: flex;
     align-items: center;
-    height: 40px;
+    gap: 10px;
+}
+
+.nav-menu li a,
+.dropbtn {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-menu li a:hover,
 .dropbtn:hover {
-    color: #f5f1e8;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
 }
 
-/* Menú desplegable */
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+}
+
 .dropdown-content {
+    display: none;
     position: absolute;
-    background: #1E88E5;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    right: -20px;
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    right: 0;
+    top: 100%;
+    background: var(--color-bg-white);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-main);
+    z-index: 10;
+    overflow: hidden;
 }
 
 .dropdown-content a {
-    color: white;
+    color: var(--color-text);
     padding: 12px 16px;
-    text-decoration: none;
     display: block;
+    border-radius: 0;
+    width: 100%;
 }
 
-.dropdown-content a:hover {
-    background: #1F3DE5;
+/* Opciones normales (todas las que NO son 'logout') */
+.dropdown-content a:not(.logout):hover {
+    background-color: var(--color-primary);
+    color: white;
 }
 
 .dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+    display: block;
 }
 
-/* Contenido principal */
-.main-content {
-    padding: 40px 20px;
+.dropdown-content a.logout {
+    color: #d9534f;
 }
 
-.main-content h2 {
-    font-size: 28px;
-    color: #680148;
+.dropdown-content a.logout:hover {
+    background: #d9534f;
+    color: white;
+}
+
+
+
+/* --- Contenido de la Página --- */
+.page-content {
+    flex-grow: 1; /* Hace que el contenido crezca y empuje el footer hacia abajo */
+    padding: 40px 0;
+}
+
+.form-container {
+    max-width: 700px;
+    margin: 20px auto;
+    background: var(--color-bg-white);
+    padding: 30px;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.form-container h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--color-text-dark);
     margin-bottom: 10px;
 }
 
-.main-content p {
-    font-size: 18px;
-    color: #444;
-    margin: 10px auto;
-    max-width: 800px;
-}
-
-/* Formulario de cita */
-.appointment-form {
-    background: #FFFFFF;
-    padding: 30px;
-    margin: 30px auto;
-    max-width: 500px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.appointment-form label {
+.form-container p {
     font-size: 16px;
-    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 25px;
+}
+
+/* --- Botones Sí/No --- */
+.selection-prompt {
+    margin-bottom: 25px;
+}
+.selection-prompt label {
     display: block;
-    margin-top: 10px;
-    color: #0D47A1;
-}
-
-.appointment-form input,
-.appointment-form textarea,
-.appointment-form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #BBDEFB;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-/* Estilo personalizado para <select> */
-.appointment-form select {
-    background-color: white;
-    color: #z;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231565C0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 16px;
-}
-
-/* Botón general */
-.btn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background: #1565C0;
-    color: white;
-    border: none;
-    border-radius: 8px;
     font-size: 18px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: 0.3s;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 15px;
 }
 
-.btn:hover {
-    background: #1E88E5;
-}
-
-/* Animación para los botones "Sí / No" */
 .opciones-registro {
     display: flex;
-    gap: 10px;
-    margin: 10px 0;
     justify-content: center;
+    gap: 15px;
 }
 
 .opcion-btn {
-    flex: 1;
-    padding: 12px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
     font-size: 16px;
-    background-color: #1565C0;
+    border: 2px solid #e0e0e0;
+    background: var(--color-bg-white);
+    color: var(--color-text-dark);
+}
+.opcion-btn:hover {
+    background: var(--color-bg-light);
+    border-color: #ccc;
+}
+
+/* Estilo para botón activo (JS lo usa) */
+.opcion-btn.active {
+    /* Fondo naranja y texto blanco */
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    
+    /* Efectos de focus */
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px rgba(240, 158, 43, 0.4);
+}
+
+
+/* --- Estilos de Formulario (Copiado de regis.css) --- */
+#form-si, #form-no {
+    text-align: left;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Espacio extra para formularios no-grid */
+}
+
+/* Clase para que un item ocupe las dos columnas */
+.form-group.span-two {
+    grid-column: 1 / -1;
+}
+
+.btn-submit.span-two {
+    grid-column: 1 / -1;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: inherit;
+    color: var(--color-text);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(240, 158, 43, 0.3);
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-primary);
     color: white;
     border: none;
     border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-top: 20px;
+    transition: background-color 0.2s ease;
+}
+.btn-submit:hover {
+    background-color: #e69121;
 }
 
-.opcion-btn:hover {
-    transform: scale(1.05);
-    background-color: #003c8f;
-}
-
-/* Footer */
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #1565C0;
-    color: white;
+/* --- Footer (Copiado de inicio.css) --- */
+.site-footer {
+    padding: 40px 0;
+    background: var(--color-bg-white);
+    border-top: 1px solid #f0f0f0;
     text-align: center;
-    padding: 10px;
+    color: #999;
+    font-size: 14px;
+    margin-top: auto; /* Se pega al fondo */
+}
+
+.site-footer p {
+    margin: 5px 0;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .dropdown {
+        width: 100%;
+    }
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr; /* Una columna */
+    }
+    .form-group.span-two,
+    .btn-submit.span-two {
+        grid-column: 1 / 1; /* Resetea el span */
+    }
 }

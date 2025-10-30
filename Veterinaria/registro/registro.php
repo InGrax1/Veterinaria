@@ -48,48 +48,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Propietario - Patitas Felices</title>
+    <title>Registro - Clínica VetCare</title>
+    
     <link rel="stylesheet" href="../css/regis.css">
-
-  <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
-  <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
+    
+    <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
 </head>
 <body>
 
-    <form method="POST" action="registro.php">
-    <div class="background-animation"></div> <!-- Animación de fondo -->
     <div class="register-container">
-
-        <img 
-        src="https://media.tenor.com/X1nlfLKP6toAAAAM/cat-eat.gif" 
-        alt="Gatito" 
-        width="75" height="75">
-
-        <h2>Registro de Propietario</h2>
-
-        <input type="text" name="nombre" placeholder="Nombre" class="input" required>
-        <input type="text" name="usuario" placeholder="Nombre de usuario" class="input" required>
-        <input type="email" name="correo" placeholder="Correo electrónico" class="input" required>
-        <input type="password" name="password" placeholder="Contraseña" class="input" required>
-        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" class="input" required>
-        <input type="text" name="direccion" placeholder="Dirección" class="input" required>
-        <input type="text" name="telefono" placeholder="Teléfono" class="input" required>
-
-            <button class="btn">Crear Cuenta</button>
-            <p class="sign-up">¿Ya tienes una cuenta? <a href="../login/index.php">Inicia sesión aquí</a></p>
-
-</form>
-
         
-    </div>
-    <script src="../js/script.js"></script>
+        <div class="register-image-panel">
+            </div>
 
-    
+        <div class="register-form-panel">
+            
+            <div class="logo">
+                <span class="logo-icon">🐾</span>
+                Clínica Patitas Felices
+            </div>
+
+            <h1>Crea tu cuenta</h1>
+            <p class="subtitle">Ingresa tus datos para registrarte</p>
+
+            <form method="POST" action="registro.php" class="form-grid">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="usuario">Nombre de usuario</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="tu_usuario" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="tu@correo.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono" placeholder="Ej. 55 1234 5678" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirmar contraseña</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+
+                <div class="form-group span-two">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Calle, Número, Colonia, C.P." required>
+                </div>
+
+                <button type="submit" class="btn-register span-two">Crear Cuenta</button>
+            
+            </form>
+
+            <p class="login-link">
+                ¿Ya tienes una cuenta? <a href="../login/#">Inicia Sesión</a>
+            </p>
+        </div>
+    </div>
+
 </body>
 </html>

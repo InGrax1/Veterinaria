@@ -1,94 +1,204 @@
+/* --- Reseteo Básico y Estilos Globales --- */
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Evita que las burbujas salgan de la pantalla */
+    /* Fuente más limpia, similar a la imagen */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f4f5; /* Fondo gris claro para que resalte la tarjeta */
     display: flex;
-    flex-direction: column; /* Para acomodar bien el footer */
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #dab6fc, #a785f3);
-    animation: gradientMove 60s infinite alternate;
+    min-height: 100vh;
 }
 
-
-/* Animación del fondo */
-@keyframes gradientMove {
-    0% { background: linear-gradient(135deg, #dab6fc, #a785f3); }
-    100% { background: linear-gradient(135deg, #a785f3, #dab6fc); }
+* {
+    box-sizing: border-box; /* Asegura que padding no afecte el ancho total */
 }
 
-/* Burbujas flotantes */
-.bubble {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    animation: floatBubbles 8s infinite alternate;
-}
-
-
-/* Animación de las burbujas */
-@keyframes floatBubbles {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(-200px) scale(1.2); }
-}
-
-/* Login container con color similar al fondo */
+/* --- Contenedor Principal del Login --- */
 .login-container {
-    background: rgba(230, 200, 255, 0.8); /* Color con transparencia similar al fondo */
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    display: flex;
+    width: 900px; /* Ancho total del contenedor */
+    max-width: 95%; /* Responsivo en pantallas pequeñas */
+    min-height: 600px;
+    background: #ffffff;
+    border-radius: 24px; /* Bordes bien redondeados */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* Para que los paneles hijos respeten los bordes redondeados */
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
+/* --- Panel Izquierdo (Imagen) --- */
+.login-image-panel {
+    flex: 1; /* Ocupa la mitad del espacio */
+    background-color: #fbeedc; /* Color crema/naranja pálido de la imagen */
+    /* Si quisieras una imagen de fondo, la pones aquí */
 }
 
-/* Centramos correctamente los inputs */
-.input {
-    width: calc(100% - 20px); /* Asegura que los inputs no queden pegados al borde */
-    padding: 10px;
-    margin: 10px auto;
-    display: block; /* Para que estén alineados verticalmente */
-    border: 1px solid #a785f3;
-    border-radius: 8px;
+/* --- Panel Derecho (Formulario) --- */
+.login-form-panel {
+    flex: 1.2; /* Ligeramente más grande que el panel de imagen */
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.input:focus {
-    border-color: #a785f3;
-    box-shadow: 0px 0px 8px rgba(167, 133, 243, 0.6);
+/* --- Logo --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #f09e2b; /* Color naranja principal */
+    margin-bottom: 24px;
 }
 
-.btn {
-    background: #a785f3;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+.logo-icon {
+    font-size: 24px; /* Icono de la patita */
 }
 
-.btn:hover {
-    background: #dab6fc;
+/* --- Títulos --- */
+h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1f2937; /* Negro/Gris oscuro */
+    margin: 0 0 8px 0;
 }
 
+.subtitle {
+    font-size: 16px;
+    color: #6b7280; /* Gris medio */
+    margin: 0 0 32px 0;
+}
 
+/* --- Formulario y Campos --- */
+.form-group {
+    margin-bottom: 20px;
+}
 
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151; /* Gris oscuro */
+}
 
-/* Pie de página */
-.footer {
-    position: absolute;
-    bottom: 10px;
-    text-align: center;
+/* Fila para "Contraseña" y "Olvidé..." */
+.form-row-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-password {
     font-size: 14px;
-    color: black;
-    padding: 10px;
+    color: #f09e2b;
+    text-decoration: none;
+    font-weight: 600;
+}
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
+/* Estilo de Inputs */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db; /* Borde gris claro */
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.5; /* Altura de línea para que se vea bien */
+}
+input[type="text    "]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #f09e2b;
+    box-shadow: 0 0 0 2px rgba(240, 158, 43, 0.3); /* Resplandor naranja al enfocar */
+}
+/* Placeholder con color suave */
+::placeholder {
+    color: #9ca3af;
+}
+
+/* Contenedor para el ícono del ojo */
+.password-wrapper {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af; /* Gris del ícono */
+    cursor: pointer;
+    user-select: none; /* Evita que se seleccione el texto del ícono */
+}
+
+/* --- Botón de Login --- */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: #f09e2b; /* Naranja principal */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+.btn-login:hover {
+    background-color: #e69121; /* Naranja un poco más oscuro */
+}
+
+/* --- Enlace de Registro --- */
+.register-link {
+    text-align: center;
+    margin-top: 24px;
+    color: #6b7280;
+}
+
+.register-link a {
+    color: #f09e2b;
+    font-weight: 600;
+    text-decoration: none;
+}
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsividad para móviles --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        background-color: #ffffff; /* Fondo blanco en móvil */
+    }
+    
+    .login-container {
+        flex-direction: column; /* Apila los paneles verticalmente */
+        width: 100%;
+        max-width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .login-image-panel {
+        display: none; /* Oculta el panel de imagen en móviles */
+    }
+
+    .login-form-panel {
+        flex: 1;
+        padding: 32px;
+        justify-content: flex-start; /* Alinea al inicio */
+        padding-top: 60px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
