@@ -30,8 +30,12 @@ body {
 /* --- Panel Izquierdo (Imagen) --- */
 .login-image-panel {
     flex: 1; /* Ocupa la mitad del espacio */
-    background-color: #fbeedc; /* Color crema/naranja pálido de la imagen */
-    /* Si quisieras una imagen de fondo, la pones aquí */
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzxdyQL2sWFW7evWk1C0IRGnli49KSC9_WRw&s');
+    
+    /* Y AÑADE ESTO (para que se vea bien): */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* --- Panel Derecho (Formulario) --- */

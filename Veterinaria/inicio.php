@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://i.imgur.com/v82p6fS.png" alt="Cachorro feliz">
+                    <img src="https://media.istockphoto.com/id/1503385646/es/foto/retrato-divertido-y-feliz-perro-cachorro-shiba-inu-asom%C3%A1ndose-detr%C3%A1s-de-una-pancarta-azul.jpg?s=612x612&w=0&k=20&c=mMZ1Dvy0J8iNpF2boWkL8bo45vYYPi_AvZ1aYr9oO8w=" alt="Cachorro feliz">
                 </div>
             </div>
         </section>
@@ -111,7 +111,7 @@
                     <p>Creemos en la prevención como la mejor medicina. Además de nuestros servicios clínicos, ofrecemos una tienda con productos de alta calidad para el cuidado diario de tu mascota, desde alimentos especializados hasta juguetes y accesorios.</p>
                 </div>
                 <div class="care-image-box">
-                    <img src="https://i.imgur.com/fD0mSjB.png" alt="Gato descansando">
+                    <img src="https://img.freepik.com/vector-gratis/ejemplo-lindo-vector-historieta-salmon-sushi-gato_138676-2230.jpg" alt="Gato descansando">
                     <h3>Tienda de Productos</h3>
                     <p>Encuentra todo lo que necesitas para el bienestar de tu compañero en nuestra clínica.</p>
                 </div>

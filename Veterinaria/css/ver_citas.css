@@ -58,7 +58,7 @@ body {
     color: var(--color-primary);
 }
 
-/* --- Estilo de Navegación (Copiado) --- */
+/* --- Estilo de Navegación (Copiado y Corregido) --- */
 .nav-menu {
     list-style: none;
     display: flex;
@@ -207,6 +207,7 @@ body {
     border-radius: 6px;
     font-size: 13px;
     color: white;
+    text-transform: capitalize;
 }
 .estado-esperando {
     background-color: var(--color-warning);
@@ -218,18 +219,22 @@ body {
     background-color: var(--color-success);
 }
 
-/* --- Mensajes y Botones Extra --- */
-.no-citas-message {
-    font-size: 16px;
-    color: var(--color-text);
-    padding: 30px 0;
-}
+/* --- 
+NUEVOS ESTILOS 
+--- */
 
-.btn-secondary {
-    display: inline-block;
+/* --- Estilos para Botones de Filtro --- */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 25px;
+}
+.btn-filter {
     text-decoration: none;
-    margin-top: 20px;
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -237,10 +242,59 @@ body {
     background: var(--color-bg-white);
     color: var(--color-text-dark);
 }
-.btn-secondary:hover {
+.btn-filter:hover {
     background: var(--color-bg-light);
     border-color: #ccc;
 }
+.btn-filter.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+/* --- Estilos para Bloque "No Hay Citas" --- */
+.no-citas-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+.no-citas-img {
+    width: 150px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.no-citas-container h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 10px;
+}
+.no-citas-container p {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Botón primario (para "Agendar") */
+.btn-primary { 
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+}
+.btn-primary:hover {
+    background: #e69121;
+    border-color: #e69121;
+}
+
+/* --- 
+FIN DE NUEVOS ESTILOS 
+--- */
+
 
 /* --- Footer (Copiado) --- */
 .site-footer {
@@ -269,5 +323,10 @@ body {
     .table-container {
         padding: 20px;
     }
-    /* El .table-wrapper se encargará del scroll horizontal */
+}
+
+@media (max-width: 480px) {
+    .filter-buttons {
+        flex-direction: column; /* Apila los botones de filtro en móviles */
+    }
 }
