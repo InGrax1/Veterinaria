@@ -1,4 +1,4 @@
-/* --- Variables y Estilos Globales --- */
+/* --- Variables y Estilos Globales (TUS ESTILOS) --- */
 :root {
     --color-primary: #f09e2b; /* Naranja principal */
     --color-text: #555;
@@ -7,6 +7,11 @@
     --color-bg-white: #ffffff;
     --border-radius-main: 12px;
     --color-danger: #d9534f;
+    
+    /* Variables del nuevo diseño de la imagen */
+    --border-radius-card: 20px;
+    --border-radius-input: 12px;
+    --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -31,7 +36,7 @@ body {
     padding: 0 20px;
 }
 
-/* --- Estilo del Header (Copiado) --- */
+/* --- Estilo del Header (TU ESTILO ORIGINAL) --- */
 .site-header {
     background: var(--color-bg-white);
     padding: 20px 0;
@@ -55,7 +60,7 @@ body {
     color: var(--color-primary);
 }
 
-/* --- Estilo de Navegación (Copiado y Corregido) --- */
+/* --- Estilo de Navegación (TU ESTILO ORIGINAL, CON LA CORRECCIÓN :not) --- */
 .nav-menu {
     list-style: none;
     display: flex;
@@ -70,6 +75,11 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     transition: background-color 0.2s ease, color 0.2s ease;
+    background: none; /* Añadido para resetear */
+    border: none; /* Añadido para resetear */
+    cursor: pointer; /* Añadido para resetear */
+    font-family: inherit; /* Añadido para resetear */
+    font-size: 16px; /* Añadido para resetear */
 }
 .nav-menu li a:hover,
 .dropbtn:hover {
@@ -78,13 +88,6 @@ body {
 }
 .dropdown {
     position: relative;
-}
-.dropbtn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 16px;
 }
 .dropdown-content {
     display: none;
@@ -120,117 +123,137 @@ body {
     color: white;
 }
 
-/* --- Contenido de la Página --- */
+/* --- 
+   NUEVO CONTENIDO DE PÁGINA 
+   (REEMPLAZA TU .form-container, .contact-info, etc.)
+--- */
+
 .page-content {
-    flex-grow: 1; /* Empuja el footer hacia abajo */
-    padding: 40px 0;
+    flex-grow: 1;
+    padding: 60px 0;
 }
 
-.form-container {
-    max-width: 700px;
-    margin: 20px auto;
-    background: var(--color-bg-white);
-    padding: 30px;
-    border-radius: var(--border-radius-main);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
 }
 
-.form-container h2 {
-    font-size: 30px;
+/* Columna Izquierda */
+.contact-info-left {
+    padding-top: 20px;
+}
+.contact-info-left h1 {
+    font-size: 42px;
     font-weight: 800;
     color: var(--color-text-dark);
-    margin-bottom: 10px;
-    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 20px;
 }
-.form-container p {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-/* --- Bloque de info de contacto --- */
-.contact-info {
-    text-align: left;
-    background: var(--color-bg-light);
-    padding: 20px;
-    border-radius: 8px;
+.contact-info-left p {
+    font-size: 16px;
     margin-bottom: 30px;
-    border-left: 4px solid var(--color-primary);
-}
-.contact-info h3 {
-    font-size: 18px;
-    color: var(--color-text-dark);
-    margin-bottom: 10px;
-}
-.contact-info p {
-    text-align: left;
-    margin-bottom: 5px;
-    font-size: 15px;
+    color: var(--color-text-light);
 }
 
-/* --- Estilos de Formulario (Copiado de regicita.css) --- */
-form {
-    text-align: left;
+.direct-contact-card {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    padding: 30px;
+    box-shadow: var(--shadow-main);
 }
-.form-group {
+.direct-contact-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 20px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px !important;
+    font-size: 16px;
+}
+.contact-item i {
+    font-size: 18px;
+    color: var(--color-primary);
+    width: 20px;
+    text-align: center;
+}
+
+/* Columna Derecha (Formulario) */
+.contact-form-right {
+    width: 100%;
+}
+.contact-form-card {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    padding: 40px;
+    box-shadow: var(--shadow-main);
+}
+
+/* Sobrescribimos los estilos de formulario
+  que tenías antes
+*/
+.contact-form-card .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
-
-label {
+.contact-form-card label {
+    display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #374151;
-    font-size: 14px;
+    color: var(--color-text-dark);
+    font-size: 15px;
 }
-
-input[type="text"],
-input[type="email"],
-textarea {
+.contact-form-card input[type="text"],
+.contact-form-card input[type="email"],
+.contact-form-card textarea {
     width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
+    padding: 14px 16px;
+    border: 1px solid #f0f0f0; /* Borde más suave */
+    border-radius: var(--border-radius-input);
+    font-size: 16px;
     font-family: inherit;
-    color: var(--color-text);
+    background: #f9f9f9; /* Fondo gris claro para inputs */
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
+.contact-form-card input[type="text"]:focus,
+.contact-form-card input[type="email"]:focus,
+.contact-form-card textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(240, 158, 43, 0.3);
+    background: var(--color-bg-white);
+    box-shadow: 0 0 0 3px rgba(240, 158, 43, 0.3);
 }
-
-textarea {
-    min-height: 100px;
+.contact-form-card textarea {
+    min-height: 120px;
     resize: vertical;
 }
 
-/* Botón (reutilizado) */
-.btn-primary { 
-    display: inline-block;
+/* Botón de Enviar (diferente de .btn-primary) */
+.btn-submit {
     width: 100%;
-    text-decoration: none;
-    padding: 14px;
-    border-radius: 8px;
+    padding: 16px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-input);
     font-size: 16px;
     font-weight: 700;
-    transition: all 0.3s ease;
-    background: var(--color-primary);
-    color: white;
-    border: 2px solid var(--color-primary);
     cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
 }
-.btn-primary:hover {
-    background: #e69121;
-    border-color: #e69121;
+.btn-submit:hover {
+    background-color: var(--color-primary-dark);
 }
 
-/* --- Footer (Copiado) --- */
+
+/* --- Footer (TU ESTILO ORIGINAL) --- */
 .site-footer {
     padding: 40px 0;
     background: var(--color-bg-white);
@@ -244,8 +267,15 @@ textarea {
     margin: 5px 0;
 }
 
-/* --- Responsividad --- */
+/* --- Responsividad (TU ESTILO + EL NUEVO) --- */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr; /* Apila las columnas */
+        gap: 40px;
+    }
+}
 @media (max-width: 768px) {
+    /* Tu responsividad de header/nav */
     .site-header .container, .nav-menu, .dropdown {
         width: 100%;
         flex-direction: column;
@@ -254,8 +284,14 @@ textarea {
     .nav-menu li { width: 100%; text-align: center; }
     .dropdown-content { position: static; box-shadow: none; }
     
-    .form-container {
-        padding: 20px;
-        margin: 20px;
+    /* Responsividad del cuerpo */
+    .page-content {
+        padding: 30px 10px;
+    }
+    .contact-info-left h1 {
+        font-size: 32px;
+    }
+    .contact-form-card {
+        padding: 30px;
     }
 }

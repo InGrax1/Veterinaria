@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Contacto - Veterinaria</title>
-    <link rel="stylesheet" href="css/contacto.css"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <link rel="stylesheet" href="/Veterinaria/Veterinaria/css/contacto.css"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
     <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
 </head>
@@ -37,38 +40,59 @@
     </header>
 
     <main class="page-content">
-        <div class="form-container">
-            <h2>Contáctanos</h2>
-            <p>Envíanos un mensaje si tienes dudas o comentarios.</p>
-
-            <div class="contact-info">
-                <h3>Clínica Veterinaria Patitas Felices</h3>
-                <p><strong>Teléfono:</strong> (123) 456-7890</p>
-                <p><strong>Email:</strong> contacto@patitasfelices.com</p>
-                <p><strong>Dirección:</strong> Calle 123, Ciudad Animalia</p>
+        <div class="container">
+            <div class="contact-container">
+            <div class="contact-info-left">
+                <h1>¡Hablemos!</h1>
+                <p>Estamos aquí para ayudarte con cualquier pregunta que tengas. Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+                
+                <div class="direct-contact-card">
+                    <h3>Contacto Directo</h3>
+                    <p class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>(123) 456-7890</span>
+                    </p>
+                    <p class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Calle 123, Ciudad Animalia</span>
+                    </p>
+                    <p class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contacto@patitasfelices.com</span>
+                    </p>
+                </div>
             </div>
 
-            <form action="https://formspree.io/f/mrbqarwd" method="POST">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
-                </div>
+            <div class="contact-form-right">
+                <form action="https://formspree.io/f/mrbqarwd" method="POST" class="contact-form-card">
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="correo">Correo electrónico</label>
-                    <input type="email" id="correo" name="email" placeholder="correo@ejemplo.com" required>
-                </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" id="correo" name="email" placeholder="ejemplo@correo.com" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="asunto">Asunto</label>
+                        <input type="text" id="asunto" name="asunto" placeholder="Consulta general, cita, etc.">
+                    </div>
 
-                <button type="submit" class="btn-primary">Enviar mensaje</button>
-            </form>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                
+                </form>
+            </div>
+        </div>
         </div>
     </main>
-
     <footer class="site-footer">
         <div class="container">
             <p>Clínica Veterinaria Patitas Felices © 2025</p>
