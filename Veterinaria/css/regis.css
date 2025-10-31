@@ -1,95 +1,191 @@
-/* Solución al scroll horizontal */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* --- Reseteo Básico y Estilos Globales --- */
 body {
-    width: 100vw;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 20px 0; /* Añade padding vertical para scrolls */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f4f5;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #dab6fc, #a785f3);
-    animation: gradientMove 6s infinite alternate;
 }
 
-/* Animación del fondo */
-@keyframes gradientMove {
-    0% { background: linear-gradient(135deg, #dab6fc, #a785f3); }
-    100% { background: linear-gradient(135deg, #a785f3, #dab6fc); }
+* {
+    box-sizing: border-box;
 }
 
-/* Burbujas flotantes */
-.bubble {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    animation: floatBubbles 8s infinite alternate;
-}
-
-/* Animación de las burbujas */
-@keyframes floatBubbles {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(-200px) scale(1.2); }
-}
-
-/* Contenedor de registro más ancho */
+/* --- Contenedor Principal del Registro --- */
 .register-container {
-    background: rgba(230, 200, 255, 0.85);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    width: 380px; /* Más ancho */
-    max-width: 90%;
-    min-height: 350px; /* Menos alto */
+    display: flex;
+    width: 1000px; /* Más ancho para que quepan los campos */
+    max-width: 95%;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin: 40px 0; /* Margen por si el contenido es muy alto */
 }
 
-/* Inputs alineados */
-.input {
-    width: 90%;
-    padding: 12px;
-    margin: 6px auto;
-    display: block;
-    border: 1px solid #a785f3;
+/* --- Panel Izquierdo (Imagen) --- */
+.register-image-panel {
+    flex: 1;
+    background-color: #fbeedc; /* Color crema */
+    min-height: 100%;
+}
+
+/* --- Panel Derecho (Formulario) --- */
+.register-form-panel {
+    flex: 1.5; /* Más espacio para el formulario que en el login */
+    padding: 40px;
+}
+
+/* --- Logo (Reutilizado de login) --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #f09e2b;
+    margin-bottom: 20px;
+}
+
+.logo-icon {
+    font-size: 24px;
+}
+
+/* --- Títulos (Reutilizado de login) --- */
+h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0 0 24px 0;
+}
+
+/* --- Grid del Formulario --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Clase para que un item ocupe las dos columnas */
+.form-group.span-two {
+    grid-column: 1 / -1;
+}
+
+.btn-register.span-two {
+    grid-column: 1 / -1;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+/* --- Inputs (Estilo de login) --- */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* Botón centrado correctamente */
-.btn {
-    width: 90%;
-    margin: 15px auto;
-    padding: 12px;
-    background: #a785f3;
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #f09e2b;
+    box-shadow: 0 0 0 2px rgba(240, 158, 43, 0.3);
+}
+::placeholder {
+    color: #9ca3af;
+}
+
+/* --- Botón (Estilo de login) --- */
+.btn-register {
+    width: 100%;
+    padding: 14px;
+    background-color: #f09e2b;
     color: white;
     border: none;
     border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.3s;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
 }
 
-.btn:hover {
-    background: #dab6fc;
+.btn-register:hover {
+    background-color: #e69121;
 }
 
-/* Enlace ajustado */
-.register-container p {
-    margin: 10px 0 0;
-}
-
-/* Pie de página fijo */
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    color: white;
+/* --- Enlace de Login (Estilo de login) --- */
+.login-link {
     text-align: center;
-    padding: 10px;
+    margin-top: 20px;
+    color: #6b7280;
+}
+
+.login-link a {
+    color: #f09e2b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        background-color: #ffffff;
+    }
+    .register-container {
+        flex-direction: column;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    .register-image-panel {
+        display: none; /* Oculta panel de imagen en móvil */
+    }
+
+    .register-form-panel {
+        padding: 32px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+    }
+
+    /* Resetea el span en móvil */
+    .form-group.span-two {
+        grid-column: 1 / 1; 
+    }
+    .btn-register.span-two {
+        grid-column: 1 / 1;
+    }
 }

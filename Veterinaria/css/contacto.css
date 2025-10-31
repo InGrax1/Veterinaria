@@ -1,194 +1,297 @@
-
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom, #f7f7ff, #e0e7ff);
-      color: #333;
-      min-height: 100vh;
-      padding-bottom: 60px;
-    }
-
+/* --- Variables y Estilos Globales (TUS ESTILOS) --- */
+:root {
+    --color-primary: #f09e2b; /* Naranja principal */
+    --color-text: #555;
+    --color-text-dark: #111;
+    --color-bg-light: #fafafa;
+    --color-bg-white: #ffffff;
+    --border-radius-main: 12px;
+    --color-danger: #d9534f;
     
-/* Header con nuevo color */
-.header {
+    /* Variables del nuevo diseño de la imagen */
+    --border-radius-card: 20px;
+    --border-radius-input: 12px;
+    --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg-light); /* Fondo gris claro */
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Estilo del Header (TU ESTILO ORIGINAL) --- */
+.site-header {
+    background: var(--color-bg-white);
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.site-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #6C63FF;
-    padding: 15px 25px;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    transition: background 0.3s ease;
 }
-
 .logo {
-    width: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+.logo-icon {
+    font-size: 24px;
+    color: var(--color-primary);
 }
 
-/* Navegación */
+/* --- Estilo de Navegación (TU ESTILO ORIGINAL, CON LA CORRECCIÓN :not) --- */
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 10px;
 }
-
-.nav-menu li {
-    position: relative;
-}
-
-.nav-menu li a, .dropbtn {
+.nav-menu li a,
+.dropbtn {
     text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
+    color: var(--color-text);
+    font-weight: 500;
     padding: 10px 15px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    height: 40px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    background: none; /* Añadido para resetear */
+    border: none; /* Añadido para resetear */
+    cursor: pointer; /* Añadido para resetear */
+    font-family: inherit; /* Añadido para resetear */
+    font-size: 16px; /* Añadido para resetear */
 }
-
 .nav-menu li a:hover,
 .dropbtn:hover {
-    color: #ff9ebc; /* Rosa pastel */
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
 }
-
-
+.dropdown {
+    position: relative;
+}
 .dropdown-content {
+    display: none;
     position: absolute;
-    background: #4353c5;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    right: -20px;
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    right: 0;
+    top: 100%;
+    background: var(--color-bg-white);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-main);
+    z-index: 10;
+    overflow: hidden;
 }
-
 .dropdown-content a {
-    color: white;
+    color: var(--color-text);
     padding: 12px 16px;
-    text-decoration: none;
+    display: block;
+    border-radius: 0;
+    width: 100%;
+}
+.dropdown-content a:not(.logout):hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+.dropdown:hover .dropdown-content {
     display: block;
 }
-
-.dropdown-content a:hover {
-    background: #7a81e2;
+.dropdown-content a.logout {
+    color: var(--color-danger);
+}
+.dropdown-content a.logout:hover {
+    background: var(--color-danger);
+    color: white;
 }
 
-.dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+/* --- 
+   NUEVO CONTENIDO DE PÁGINA 
+   (REEMPLAZA TU .form-container, .contact-info, etc.)
+--- */
+
+.page-content {
+    flex-grow: 1;
+    padding: 60px 0;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Columna Izquierda */
+.contact-info-left {
+    padding-top: 20px;
+}
+.contact-info-left h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+.contact-info-left p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: var(--color-text-light);
+}
+
+.direct-contact-card {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    padding: 30px;
+    box-shadow: var(--shadow-main);
+}
+.direct-contact-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 20px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px !important;
+    font-size: 16px;
+}
+.contact-item i {
+    font-size: 18px;
+    color: var(--color-primary);
+    width: 20px;
+    text-align: center;
+}
+
+/* Columna Derecha (Formulario) */
+.contact-form-right {
+    width: 100%;
+}
+.contact-form-card {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    padding: 40px;
+    box-shadow: var(--shadow-main);
+}
+
+/* Sobrescribimos los estilos de formulario
+  que tenías antes
+*/
+.contact-form-card .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.contact-form-card label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: 15px;
+}
+.contact-form-card input[type="text"],
+.contact-form-card input[type="email"],
+.contact-form-card textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #f0f0f0; /* Borde más suave */
+    border-radius: var(--border-radius-input);
+    font-size: 16px;
+    font-family: inherit;
+    background: #f9f9f9; /* Fondo gris claro para inputs */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-form-card input[type="text"]:focus,
+.contact-form-card input[type="email"]:focus,
+.contact-form-card textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-bg-white);
+    box-shadow: 0 0 0 3px rgba(240, 158, 43, 0.3);
+}
+.contact-form-card textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Botón de Enviar (diferente de .btn-primary) */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-input);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+.btn-submit:hover {
+    background-color: var(--color-primary-dark);
 }
 
 
+/* --- Footer (TU ESTILO ORIGINAL) --- */
+.site-footer {
+    padding: 40px 0;
+    background: var(--color-bg-white);
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: auto; /* Se pega al fondo */
+}
+.site-footer p {
+    margin: 5px 0;
+}
 
-
-
-    /* Contact Form */
-    .contact-form {
-      background-color: #fff;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 35px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+/* --- Responsividad (TU ESTILO + EL NUEVO) --- */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr; /* Apila las columnas */
+        gap: 40px;
     }
-
-    .contact-form h2 {
-      color: #6C63FF;
-      margin-bottom: 20px;
-      font-weight: bold;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 10px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: #3F3D56;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-      background-color: white;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #6C63FF;
-      outline: none;
-    }
-
-    .btn-primary {
-      background-color: #FF6584;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
-    }
-
-    .btn-primary:hover {
-      background-color: #e64a6d;
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #6C63FF;
-      color: #f1f1f1;
-      text-align: center;
-      padding: 12px;
-      font-size: 14px;
-      box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
-    }
-
-    @media (max-width: 600px) {
-      .header {
+}
+@media (max-width: 768px) {
+    /* Tu responsividad de header/nav */
+    .site-header .container, .nav-menu, .dropdown {
+        width: 100%;
         flex-direction: column;
-        gap: 10px;
-      }
-
-      .nav-menu {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .contact-form {
-        padding: 20px;
-        margin: 20px;
-      }
     }
+    .site-header .container { gap: 15px; }
+    .nav-menu li { width: 100%; text-align: center; }
+    .dropdown-content { position: static; box-shadow: none; }
+    
+    /* Responsividad del cuerpo */
+    .page-content {
+        padding: 30px 10px;
+    }
+    .contact-info-left h1 {
+        font-size: 32px;
+    }
+    .contact-form-card {
+        padding: 30px;
+    }
+}
