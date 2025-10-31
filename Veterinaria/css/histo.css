@@ -1,12 +1,15 @@
-/* --- Variables y Estilos Globales --- */
+/* --- Variables y Estilos Globales (TUS ESTILOS) --- */
 :root {
     --color-primary: #f09e2b; /* Naranja principal */
+    --color-primary-dark: #e69121;
     --color-text: #555;
     --color-text-dark: #111;
     --color-bg-light: #fafafa;
     --color-bg-white: #ffffff;
     --border-radius-main: 12px;
     --color-danger: #d9534f;
+    --color-border: #e0e0e0;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -17,7 +20,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--color-bg-light); /* Fondo gris claro */
+    background-color: var(--color-bg-light);
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
@@ -26,18 +29,19 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 900px; /* Un poco más angosto para esta página */
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* --- Estilo del Header (Copiado) --- */
+/* --- Estilo del Header (TU ESTILO ORIGINAL) --- */
 .site-header {
     background: var(--color-bg-white);
     padding: 20px 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--color-border);
 }
 .site-header .container {
+    max-width: 1100px; /* El header puede ser más ancho */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,124 +59,194 @@ body {
     color: var(--color-primary);
 }
 
-/* --- Estilo de Navegación (Copiado y Corregido) --- */
-.nav-menu {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.nav-menu li a,
-.dropbtn {
-    text-decoration: none;
-    color: var(--color-text);
-    font-weight: 500;
-    padding: 10px 15px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-.nav-menu li a:hover,
-.dropbtn:hover {
-    background-color: var(--color-bg-light);
-    color: var(--color-text-dark);
-}
-.dropdown {
-    position: relative;
-}
-.dropbtn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 16px;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: var(--color-bg-white);
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius-main);
-    z-index: 10;
-    overflow: hidden;
-}
-.dropdown-content a {
-    color: var(--color-text);
-    padding: 12px 16px;
-    display: block;
-    border-radius: 0;
-    width: 100%;
-}
-.dropdown-content a:not(.logout):hover {
-    background-color: var(--color-primary);
-    color: white;
-}
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.dropdown-content a.logout {
-    color: var(--color-danger);
-}
-.dropdown-content a.logout:hover {
-    background: var(--color-danger);
-    color: white;
-}
+/* --- Estilo de Navegación (TU ESTILO ORIGINAL, CON :not) --- */
+.nav-menu { list-style: none; display: flex; align-items: center; gap: 10px; }
+.nav-menu li a, .dropbtn { text-decoration: none; color: var(--color-text); font-weight: 500; padding: 10px 15px; border-radius: 8px; transition: background-color 0.2s ease, color 0.2s ease; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 16px; }
+.nav-menu li a:hover, .dropbtn:hover { background-color: var(--color-bg-light); color: var(--color-text-dark); }
+.dropdown { position: relative; }
+.dropdown-content { display: none; position: absolute; right: 0; top: 100%; background: var(--color-bg-white); min-width: 200px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-radius: var(--border-radius-main); z-index: 10; overflow: hidden; }
+.dropdown-content a { color: var(--color-text); padding: 12px 16px; display: block; border-radius: 0; width: 100%; }
+.dropdown-content a:not(.logout):hover { background-color: var(--color-primary); color: white; }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content a.logout { color: var(--color-danger); }
+.dropdown-content a.logout:hover { background: var(--color-danger); color: white; }
 
-/* --- Contenido de la Página --- */
+/* --- 
+   NUEVOS ESTILOS PARA LA PÁGINA DE HISTORIAL 
+--- */
+
 .page-content {
     flex-grow: 1;
     padding: 40px 0;
 }
 
-.page-title {
-    font-size: 30px;
+/* Cabecera de Página (Título + Botón) */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Para móviles */
+    gap: 20px;
+}
+.page-header h1 {
+    font-size: 32px;
     font-weight: 800;
     color: var(--color-text-dark);
-    margin-bottom: 25px;
-    text-align: center;
+    margin: 0;
+}
+.page-header p {
+    font-size: 16px;
+    color: var(--color-text);
+    margin: 0;
 }
 
-/* --- Estilos para la Tarjeta de Historial --- */
-.historial-list {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.historial {
-    background: var(--color-bg-white);
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 20px;
     border-radius: var(--border-radius-main);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    margin-bottom: 25px;
-    padding: 25px;
-    text-align: left;
-    border-left: 5px solid var(--color-primary); /* Acento de color */
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.btn-download:hover {
+    background-color: var(--color-primary-dark);
 }
 
-.historial h3 {
+/* Pestañas de Mascotas */
+.pet-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 30px;
+}
+.pet-tab {
+    padding: 10px 20px;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.pet-tab:hover {
+    color: var(--color-text-dark);
+}
+.pet-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+/* Tarjeta de Info de Mascota */
+.pet-info-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--color-bg-white);
+    padding: 25px;
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 40px;
+}
+.pet-info-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+}
+.pet-info-details h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin: 0;
+}
+.pet-info-details p {
+    font-size: 16px;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Título de Cronología */
+.timeline-title {
     font-size: 22px;
     font-weight: 700;
     color: var(--color-text-dark);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-.historial h4 {
+/* Cronología */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.timeline-item {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--color-border);
+    overflow: hidden; /* Para que el contenido no se salga */
+}
+.timeline-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    cursor: pointer;
+    list-style: none; /* Quita la flecha del <summary> */
+}
+.timeline-header::-webkit-details-marker {
+    display: none; /* Quita la flecha en Chrome/Safari */
+}
+.timeline-icon-container {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--color-primary-dark);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.timeline-icon-container i {
+    font-size: 18px;
+}
+.timeline-summary-info {
+    flex-grow: 1;
+}
+.timeline-summary-info strong {
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-primary);
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #f0f0f0;
+    color: var(--color-text-dark);
+    display: block;
+}
+.timeline-summary-info small {
+    font-size: 14px;
+    color: var(--color-text);
+}
+.chevron-icon {
+    font-size: 16px;
+    color: var(--color-text);
+    transition: transform 0.2s ease;
+}
+/* Rotar el chevron cuando se abre */
+.timeline-item[open] .chevron-icon {
+    transform: rotate(180deg);
 }
 
-.historial p {
-    font-size: 16px;
+.timeline-content {
+    padding: 0 20px 20px 80px; /* 20px + 45px + 15px = 80px de indentación */
+    text-align: left;
+}
+.timeline-content p {
     margin-bottom: 8px;
 }
-
-.historial p strong {
+.timeline-content p strong {
     font-weight: 600;
     color: var(--color-text-dark);
     margin-right: 5px;
@@ -220,8 +294,20 @@ body {
     background: #e69121;
     border-color: #e69121;
 }
+/* Versión más pequeña para la cronología */
+.no-citas-container.minimal {
+    padding: 20px;
+    box-shadow: none;
+    border: 2px dashed var(--color-border);
+    background: none;
+}
+.no-citas-img-small {
+    width: 80px;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
 
-/* --- Footer (Copiado) --- */
+/* --- Footer (TU ESTILO ORIGINAL) --- */
 .site-footer {
     padding: 40px 0;
     background: var(--color-bg-white);
@@ -244,4 +330,22 @@ body {
     .site-header .container { gap: 15px; }
     .nav-menu li { width: 100%; text-align: center; }
     .dropdown-content { position: static; box-shadow: none; }
+    
+    .page-header {
+        text-align: center;
+    }
+    .page-header div, .btn-download {
+        width: 100%;
+    }
+    
+    .pet-tabs {
+        overflow-x: auto; /* Permite scroll horizontal en las pestañas */
+    }
+    .pet-tab {
+        flex-shrink: 0; /* Evita que las pestañas se encojan */
+    }
+    
+    .timeline-content {
+        padding: 0 20px 20px 20px; /* Quita la indentación en móvil */
+    }
 }

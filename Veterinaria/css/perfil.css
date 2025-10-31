@@ -1,4 +1,16 @@
-/* Reset general */
+/* --- Variables y Estilos Globales --- */
+:root {
+    --color-primary: #f09e2b;
+    --color-primary-dark: #e69121;
+    --color-text: #555;
+    --color-text-dark: #111;
+    --color-bg-light: #fafafa;
+    --color-bg-white: #ffffff;
+    --border-radius-main: 12px;
+    --border-radius-card: 20px;
+    --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,223 +18,559 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #f5f8fa, #e0f2f1);
-  overflow-x: hidden;
-  padding-bottom: 60px;
-  min-height: 100vh;
-  color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg-light);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header */
-.header {
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header --- */
+.site-header {
+    background: var(--color-bg-white);
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.site-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #006c4f;
-    padding: 15px 25px;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    transition: background 0.3s ease;
 }
 
 .logo {
-    width: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
 }
 
-/* Barra de navegación */
+.logo-icon {
+    font-size: 24px;
+    color: var(--color-primary);
+}
+
+/* --- Navegación --- */
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 10px;
 }
 
-.nav-menu li {
-    position: relative;
-}
-
-.nav-menu li a, .dropbtn {
+.nav-menu li a,
+.dropbtn {
     text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
+    color: var(--color-text);
+    font-weight: 500;
     padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
     background: none;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    height: 40px;
+    font-family: inherit;
+    font-size: 16px;
 }
 
 .nav-menu li a:hover,
 .dropbtn:hover {
-    color: #c3ff9d;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
 }
 
-/* Menú desplegable */
+.dropdown {
+    position: relative;
+}
+
 .dropdown-content {
+    display: none;
     position: absolute;
-    background: #005a4e;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    right: -20px;
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    right: 0;
+    top: 100%;
+    background: var(--color-bg-white);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-main);
+    z-index: 10;
+    overflow: hidden;
 }
 
 .dropdown-content a {
-    color: white;
+    color: var(--color-text);
     padding: 12px 16px;
-    text-decoration: none;
     display: block;
+    border-radius: 0;
+    width: 100%;
 }
 
-.dropdown-content a:hover {
-    background: #004148;
+.dropdown-content a:not(.logout):hover {
+    background-color: var(--color-primary);
+    color: white;
 }
 
 .dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+    display: block;
 }
 
-h2, h3 {
-  color: #333;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 5px;
+.dropdown-content a.logout {
+    color: #d9534f;
 }
 
-/* Formulario */
-form {
-  background: white;
-  padding: 30px;
-  max-width: 700px;
-  margin: 30px auto;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s;
+.dropdown-content a.logout:hover {
+    background: #d9534f;
+    color: white;
 }
 
-form:hover {
-  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+/* --- Contenido de la Página --- */
+.page-content {
+    flex-grow: 1;
+    padding: 40px 0;
 }
 
-/* Editables */
-.editable {
-  margin-bottom: 15px;
+.page-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    margin-bottom: 40px;
 }
 
-.editable label {
-  display: inline-block;
-  min-width: 150px;
-  font-weight: bold;
-  color: #444;
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-.editable span {
-  margin-right: 10px;
-  color: #555;
+/* --- Tarjeta de Perfil del Cliente --- */
+.profile-card {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    padding: 40px;
+    box-shadow: var(--shadow-main);
+    text-align: center;
 }
 
-.editable input[type="text"],
-.editable input[type="password"] {
-  padding: 6px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 60%;
-  max-width: 300px;
+.profile-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 5px;
+    border: none;
 }
 
-/* Icono de edición */
-.edit-icon {
-  cursor: pointer;
-  color: #007bff;
-  margin-left: 10px;
-  font-size: 18px;
+.profile-card .email {
+    color: var(--color-text);
+    font-size: 14px;
+    margin-bottom: 30px;
 }
 
-.edit-icon:hover {
-  color: #0056b3;
+.profile-info {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.profile-info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-info-item:last-child {
+    border-bottom: none;
+}
+
+.profile-info-item i {
+    font-size: 20px;
+    color: var(--color-primary);
+    width: 25px;
+    text-align: center;
+}
+
+.profile-info-item .info-content {
+    flex: 1;
+}
+
+.profile-info-item .info-label {
+    font-size: 12px;
+    color: var(--color-text);
+    display: block;
+}
+
+.profile-info-item .info-value {
+    font-size: 16px;
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+/* Inputs ocultos por defecto */
+.profile-info-item input {
+    display: none;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    font-family: inherit;
+    background: #f9f9f9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.profile-info-item input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-bg-white);
+    box-shadow: 0 0 0 3px rgba(240, 158, 43, 0.3);
+}
+
+/* Cuando está en modo edición */
+.editing .profile-info-item .info-value {
+    display: none;
+}
+
+.editing .profile-info-item input {
+    display: block;
+}
+
+.btn-edit-profile {
+    width: 100%;
+    padding: 14px;
+    background-color: #fff3e0;
+    color: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-edit-profile:hover {
+    background-color: #ffe0b2;
+}
+
+/* --- Sección de Mascotas --- */
+.pets-section {
+    background: transparent;
+}
+
+.pets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.pets-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    border: none;
+}
+
+.btn-add-pet {
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add-pet:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* --- Tarjeta de Mascota --- */
+.pet-card {
+    background: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    padding: 30px;
+    box-shadow: var(--shadow-main);
+    position: relative;
+}
+
+.pet-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 20px;
+    border: none;
+}
+
+.pet-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pet-info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.pet-info-item .label {
+    font-size: 12px;
+    color: var(--color-text);
+    margin-bottom: 4px;
+}
+
+.pet-info-item .value {
+    font-size: 16px;
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+.pet-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-view {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.btn-view:hover {
+    background-color: #bbdefb;
+}
+
+.btn-edit {
+    background-color: #fff3e0;
+    color: var(--color-primary);
+}
+
+.btn-edit:hover {
+    background-color: #ffe0b2;
+}
+
+/* --- Card para Agregar Mascota --- */
+.add-pet-card {
+    background: transparent;
+    border: 2px dashed #ddd;
+    border-radius: var(--border-radius-card);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 300px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-pet-card:hover {
+    border-color: var(--color-primary);
+    background-color: rgba(240, 158, 43, 0.05);
+}
+
+.add-pet-card i {
+    font-size: 48px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.add-pet-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 10px;
+    border: none;
+}
+
+.add-pet-card p {
+    color: var(--color-text);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* --- Formularios de Edición --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    font-family: inherit;
+    background: #f9f9f9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-bg-white);
+    box-shadow: 0 0 0 3px rgba(240, 158, 43, 0.3);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-save {
+    flex: 1;
+    padding: 14px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-save:hover {
+    background-color: #45a049;
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 14px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-main);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #da190b;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
-/* Botones */
-.guardar-btn,
-.cancelar-btn {
-  margin-top: 20px;
-  padding: 10px 25px;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+/* --- Footer --- */
+.site-footer {
+    padding: 40px 0;
+    background: var(--color-bg-white);
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: auto;
 }
 
-.guardar-btn {
-  background-color: #28a745;
-  margin-right: 10px;
+.site-footer p {
+    margin: 5px 0;
 }
 
-.guardar-btn:hover {
-  background-color: #218838;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+/* --- Responsividad --- */
+@media (max-width: 968px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .pets-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.cancelar-btn {
-  background-color: #dc3545;
-}
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
 
-.cancelar-btn:hover {
-  background-color: #c82333;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+    }
 
-/* Media Queries */
-@media (max-width: 600px) {
-  .editable label {
-    display: block;
-    margin-bottom: 5px;
-  }
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+    }
 
-  .editable input[type="text"],
-  .editable input[type="password"] {
-    width: 100%;
-  }
+    .dropdown {
+        width: 100%;
+    }
 
-  .edit-icon {
-    margin-left: 0;
-    margin-top: 5px;
-    display: inline-block;
-  }
-}
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+    }
 
-/* Footer */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #006c4f;
-  color: #f1f1f1;
-  text-align: center;
-  padding: 12px;
-  font-size: 14px;
-  box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+    .page-title {
+        font-size: 32px;
+    }
+
+    .pets-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .btn-add-pet {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pet-info-grid {
+        grid-template-columns: 1fr;
+    }
 }
