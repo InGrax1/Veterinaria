@@ -22,12 +22,13 @@ $seccion = $_GET['seccion'] ?? 'dashboard';
     <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
     <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-left">
-            <div class="logo">🐾</div>
+            <i class="fas fa-paw" style="color: #f09e2b;"></i>
             <span class="brand-name">Clínica Vet</span>
         </div>
         <div class="header-right">
@@ -54,12 +55,12 @@ $seccion = $_GET['seccion'] ?? 'dashboard';
         <aside class="sidebar">
             <div class="menu-section-title">Principal</div>
             <a href="?seccion=dashboard" class="menu-item <?= $seccion === 'dashboard' ? 'active' : '' ?>">
-                <span class="menu-item-icon">📊</span>
+                <i class="fas fa-chart-line" style="color: #f09e2b;"></i>
                 <span>Dashboard</span>
             </a>
             
             <a href="?seccion=pacientes" class="menu-item <?= $seccion === 'pacientes' ? 'active' : '' ?>">
-                <span class="menu-item-icon">🐾</span>
+                <i class="fas fa-paw" style="color: #f09e2b;"></i>
                 <span>Pacientes</span>
             </a>
             
@@ -67,13 +68,13 @@ $seccion = $_GET['seccion'] ?? 'dashboard';
             
             <div class="menu-section-title">Administración</div>
             <a href="?seccion=veterinarios" class="menu-item <?= $seccion === 'veterinarios' ? 'active' : '' ?>">
-                <span class="menu-item-icon">👨‍⚕️</span>
+                <i class="fas fa-user-md" style="color: #f09e2b;"></i>
                 <span>Veterinarios</span>
             </a>
             
             <?php if (in_array($_SESSION['veterinario_id'], [1, 2, 3])): ?>
                 <a href="?seccion=registrar_vet" class="menu-item <?= $seccion === 'registrar_vet' ? 'active' : '' ?>">
-                    <span class="menu-item-icon">➕</span>
+                    <i class="fas fa-plus" style="color: #f09e2b;"></i>
                     <span>Nuevo Veterinario</span>
                 </a>
             <?php endif; ?>
@@ -82,7 +83,7 @@ $seccion = $_GET['seccion'] ?? 'dashboard';
             
             <div class="menu-section-title">Soporte</div>
             <a href="#" class="menu-item">
-                <span class="menu-item-icon">❓</span>
+               <i class="fas fa-file-medical" style="color: #f09e2b;"></i>
                 <span>Ayuda</span>
             </a>
         </aside>

@@ -195,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label class="form-label">Nombre completo *</label>
                     <div class="form-icon">
-                        <span class="icon-prefix">👤</span>
+                        <i class="fas fa-user" style="color: #f09e2b;"></i>
                         <input type="text" 
                                name="nombre" 
                                class="form-input input-with-icon" 
@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label class="form-label">Especialidad *</label>
                     <div class="form-icon">
-                        <span class="icon-prefix">🎓</span>
+                        <i class="fas fa-pills" style="color: #f09e2b;"></i>
                         <input type="text" 
                                name="especialidad" 
                                class="form-input input-with-icon" 
