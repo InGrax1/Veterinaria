@@ -1,11 +1,17 @@
 <?php
-session_start();
+// 1. Definir variables para la plantilla
+$page_title = "Mi Perfil - Patitas Felices";
+$page_css = "/Veterinaria/Veterinaria/css/perfil.css"; // Ruta absoluta al CSS
+
+// 2. Incluir el header (subiendo un nivel con ../)
+// La sesión ya se inicia en la plantilla.
+include '../includes/plantilla_header.php';
+
+// 3. Lógica específica de esta página
 include '../includes/scriptdb.php';
 
-if (!isset($_SESSION['id_propietario'])) {
-    echo "<script>alert('Debes iniciar sesión primero.'); window.location.href='../login/index.php';</script>";
-    exit;
-}
+// Ya no necesitamos la validación de sesión aquí, se hace en el header.
+// if (!isset($_SESSION['id_propietario'])) { ... }
 
 $id_propietario = $_SESSION['id_propietario'];
 
@@ -24,52 +30,11 @@ while ($row = mysqli_fetch_assoc($result_mascotas)) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil - Patitas Felices</title>
-    
-    <link rel="stylesheet" href="../css/perfil.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
-    <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
-</head>
-<body>
-
-<header class="site-header">
-    <div class="container">
-        <div class="logo">
-            <span class="logo-icon">🐾</span>
-            Patitas Felices
-        </div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="../inicio.php">Inicio</a></li>
-                <li><a href="#">Perfil</a></li>
-                <li class="dropdown">
-                    <button class="dropbtn">Más Opciones</button>
-                    <div class="dropdown-content">
-                        <a href="../citas/regicita.php">Registrar Cita</a>
-                        <a href="../citas/ver_citas.php">Ver Citas</a>
-                        <a href="../historial/historial.php">Historial Clínico</a>
-                        <a href="../contacto.php">Contacto</a>
-                        <a href="../includes/logout.php" class="logout">Cerrar sesión</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
 <main class="page-content">
     <div class="container">
         <h1 class="page-title">Mi Perfil</h1>
 
         <div class="profile-layout">
-            <!-- Tarjeta de Perfil del Cliente -->
             <div class="profile-card" id="profileCard">
                 <h2><?= htmlspecialchars($cliente['nombre']) ?></h2>
                 <p class="email"><?= htmlspecialchars($cliente['correo']) ?></p>
@@ -127,7 +92,6 @@ while ($row = mysqli_fetch_assoc($result_mascotas)) {
                 </form>
             </div>
 
-            <!-- Sección de Mascotas -->
             <div class="pets-section">
                 <div class="pets-header">
                     <h2>Mis Mascotas</h2>
@@ -197,7 +161,6 @@ while ($row = mysqli_fetch_assoc($result_mascotas)) {
                     </div>
                     <?php endforeach; ?>
 
-                    <!-- Card para agregar mascota -->
                     <div class="add-pet-card" onclick="alert('Funcionalidad para agregar mascota')">
                         <i class="fas fa-paw"></i>
                         <h3>Agregar una nueva mascota</h3>
@@ -211,13 +174,6 @@ while ($row = mysqli_fetch_assoc($result_mascotas)) {
         </div>
     </div>
 </main>
-
-<footer class="site-footer">
-    <div class="container">
-        <p>Clínica Veterinaria Patitas Felices © 2025</p>
-        <p>Teléfono: (123) 456-7890 | Email: contacto@patitasfelices.com</p>
-    </div>
-</footer>
 
 <script>
 // Editar Perfil del Cliente
@@ -268,5 +224,7 @@ function cancelarMascota(index) {
 }
 </script>
 
-</body>
-</html>
+<?php
+// 6. Incluir el footer (subiendo un nivel con ../)
+include '../includes/plantilla_footer.php';
+?>
