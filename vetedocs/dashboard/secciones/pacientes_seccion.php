@@ -264,27 +264,29 @@ $resultado = mysqli_query($conn, $query);
                                 switch($estado) {
                                     case 'esperando':
                                         $clase = 'estado-esperando';
-                                        $texto = 'Esperando';
+                                        $texto = '⏳ Esperando';
                                         break;
                                     case 'atendiendo':
                                         $clase = 'estado-atendiendo';
-                                        $texto = 'En proceso';
+                                        $texto = '🔄 En proceso';
                                         break;
                                     case 'atendida':
                                         $clase = 'estado-atendida';
-                                        $texto = 'Atendida';
+                                        $texto = '✅ Atendida';
                                         break;
                                 }
                                 ?>
                                 <span class="estado-badge <?= $clase ?>"><?= $texto ?></span>
                             </td>
                             <td>
-                                <?php if ($row['estado_atencion'] === 'esperando' || $row['estado_atencion'] === 'atendiendo'): ?>
-                                    <a href="atender_integrado.php?id_cita=<?= $row['id_cita'] ?>" class="btn-atender-table">
-                                        Atender
+                                <?php if ($row['estado_atencion'] === 'atendida'): ?>
+                                    <a href="atender_integrado.php?id_cita=<?= $row['id_cita'] ?>" class="btn-atender-table btn-ver-detalles">
+                                        👁️ Ver Detalles
                                     </a>
                                 <?php else: ?>
-                                    <span style="color: #a0aec0;">Completada</span>
+                                    <a href="atender_integrado.php?id_cita=<?= $row['id_cita'] ?>" class="btn-atender-table">
+                                        ✏️ Atender
+                                    </a>
                                 <?php endif; ?>
                             </td>
                         <?php endif; ?>
