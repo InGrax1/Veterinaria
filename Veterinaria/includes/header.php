@@ -5,7 +5,7 @@ session_start();
 $tiempo_inactividad = 3600; 
 
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Veterinaria/login/index.php");
+    header("Location: /Veterinaria/inicio.php");
     exit();
 }
 
@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $tiempo_inactividad)) {
     session_unset();
     session_destroy();
-    header("Location: /login/index.php?timeout=1");
+    header("Location: /Veterinaria/inicio.php?timeout=1");
     exit();
 }
 

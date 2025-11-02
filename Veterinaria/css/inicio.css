@@ -78,6 +78,19 @@ body {
     color: var(--color-text-dark);
 }
 
+/* Estilo especial para el botón de Iniciar Sesión */
+.btn-login-header {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+}
+
+.btn-login-header:hover {
+    background-color: #e69121 !important;
+    color: white !important;
+}
+
 /* --- Estilo del Dropdown --- */
 .dropdown {
     position: relative;

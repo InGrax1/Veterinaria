@@ -3,21 +3,21 @@
 session_start();
 $tiempo_inactividad = 3600; 
 
-// Usamos la ruta absoluta (con doble Veterinaria) para la redirección
-if (!isset($_SESSION['usuario'])) {
-    header("Location: /Veterinaria/Veterinaria/login/index.php");
-    exit();
+// Control de inactividad solo si hay sesión activa
+if (isset($_SESSION['usuario'])) {
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $tiempo_inactividad)) {
+        session_unset();
+        session_destroy();
+        header("Location: /Veterinaria/Veterinaria/login/index.php?timeout=1");
+        exit();
+    }
+    $_SESSION['last_activity'] = time();
 }
 
-// Control de inactividad
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $tiempo_inactividad)) {
-    session_unset();
-    session_destroy();
-    header("Location: /Veterinaria/Veterinaria/login/index.php?timeout=1");
-    exit();
-}
-
-$_SESSION['last_activity'] = time();
+// Variable para saber si el usuario está logueado y qué tipo es
+$usuario_logueado = isset($_SESSION['usuario']);
+$es_veterinario = isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'veterinario';
+$es_propietario = isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'propietario';
 
 // 2. Variables para que cada página defina su título y CSS
 if (!isset($page_title)) {
@@ -55,18 +55,39 @@ if (!isset($page_css)) {
         <nav>
             <ul class="nav-menu">
                 <li><a href="/Veterinaria/Veterinaria/inicio.php">Inicio</a></li>
-                <li><a href="/Veterinaria/Veterinaria/propietario/perfil.php">Perfil</a></li>
                 
-                <li class="dropdown">
-                    <button class="dropbtn">Más Opciones</button>
-                    <div class="dropdown-content">
-                        <a href="/Veterinaria/Veterinaria/citas/regicita.php">Registrar Cita</a>
-                        <a href="/Veterinaria/Veterinaria/citas/ver_citas.php">Ver Citas</a>
-                        <a href="/Veterinaria/Veterinaria/historial/historial.php">Historial Clínico</a>
-                        <a href="/Veterinaria/Veterinaria/contacto.php">Contacto</a>
-                        <a href="/Veterinaria/Veterinaria/includes/logout.php" class="logout">Cerrar sesión</a>
-                    </div>
-                </li>
+                <?php if ($es_propietario): ?>
+                    <!-- Menú completo para PROPIETARIOS (clientes) -->
+                    <li><a href="/Veterinaria/Veterinaria/propietario/perfil.php">Perfil</a></li>
+                    
+                    <li class="dropdown">
+                        <button class="dropbtn">Más Opciones</button>
+                        <div class="dropdown-content">
+                            <a href="/Veterinaria/Veterinaria/citas/regicita.php">Registrar Cita</a>
+                            <a href="/Veterinaria/Veterinaria/citas/ver_citas.php">Ver Citas</a>
+                            <a href="/Veterinaria/Veterinaria/historial/historial.php">Historial Clínico</a>
+                            <a href="/Veterinaria/Veterinaria/contacto.php">Contacto</a>
+                            <a href="/Veterinaria/Veterinaria/includes/logout.php" class="logout">Cerrar sesión</a>
+                        </div>
+                    </li>
+                    
+                <?php elseif ($es_veterinario): ?>
+                    <!-- Menú limitado para VETERINARIOS -->
+                    <li><a href="/Veterinaria/Veterinaria/contacto.php">Contacto</a></li>
+                    
+                    <li class="dropdown">
+                        <button class="dropbtn">Mi Panel</button>
+                        <div class="dropdown-content">
+                            <a href="/Veterinaria/vetedocs/dashboard/home_vet.php">🏥 Panel Veterinario</a>
+                            <a href="/Veterinaria/Veterinaria/includes/logout.php" class="logout">Cerrar sesión</a>
+                        </div>
+                    </li>
+                    
+                <?php else: ?>
+                    <!-- Menú para visitantes no logueados -->
+                    <li><a href="/Veterinaria/Veterinaria/contacto.php">Contacto</a></li>
+                    <li><a href="/Veterinaria/Veterinaria/login/index.php" class="btn-login-header">Iniciar Sesión</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>
