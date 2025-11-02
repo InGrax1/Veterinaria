@@ -3,8 +3,7 @@
 $page_title = "Contacto - Patitas Felices";
 $page_css = "/Veterinaria/Veterinaria/css/contacto.css"; // Ruta absoluta al CSS de esta página
 
-// 2. Incluir el header
-// La lógica de sesión ya está en el header.
+// 2. Incluir el header (SIN protección - permite acceso público)
 include 'includes/plantilla_header.php';
 ?>
 

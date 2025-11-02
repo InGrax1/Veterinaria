@@ -47,6 +47,10 @@
 
                 <button type="submit" class="btn-login">Iniciar Sesión</button>
             </form>
+            
+            <a href="../inicio.php" class="forgot-password" style="display: block; text-align: center; margin-top: 15px; margin-bottom: 10px;">
+                ← Volver al Inicio
+            </a>
 
             <p class="register-link">
             ¿No tienes una cuenta? <a href="../registro/registro.php">Regístrate</a>

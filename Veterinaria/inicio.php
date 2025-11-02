@@ -3,7 +3,7 @@
 $page_title = "Inicio - Patitas Felices";
 $page_css = "/Veterinaria/Veterinaria/css/inicio.css"; // Ruta absoluta CORREGIDA
 
-// 2. Incluir el header
+// 2. Incluir el header (SIN protección obligatoria)
 include 'includes/plantilla_header.php';
 ?>
 
@@ -14,7 +14,11 @@ include 'includes/plantilla_header.php';
                 <h1>Bienvenidos a Patitas Felices, donde cuidamos a tu mejor amigo</h1>
                 <p>Comprometidos con la salud y felicidad de tu mascota en cada etapa de su vida.</p>
                 <div class="hero-buttons">
-                    <a href="/Veterinaria/Veterinaria/citas/regicita.php" class="btn btn-primary">Agenda una Cita</a>
+                    <?php if ($usuario_logueado): ?>
+                        <a href="/Veterinaria/Veterinaria/citas/regicita.php" class="btn btn-primary">Agenda una Cita</a>
+                    <?php else: ?>
+                        <a href="/Veterinaria/Veterinaria/login/index.php" class="btn btn-primary">Inicia Sesión para Agendar</a>
+                    <?php endif; ?>
                     <a href="#servicios" class="btn btn-secondary">Nuestros Servicios</a>
                 </div>
             </div>
@@ -79,7 +83,9 @@ include 'includes/plantilla_header.php';
 
 </main>
 
-<script src="/Veterinaria/Veterinaria/js/scrini.js"></script> <?php
+<script src="/Veterinaria/Veterinaria/js/scrini.js"></script>
+
+<?php
 // 5. Incluir el footer
 include 'includes/plantilla_footer.php';
 ?>
