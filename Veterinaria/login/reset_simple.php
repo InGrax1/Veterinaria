@@ -9,19 +9,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = trim($_POST['usuario']);
         $correo = trim($_POST['correo']);
         
-        // Verificar que el usuario y correo coincidan en la base de datos
-        $sql = "SELECT id_propietario, nombre FROM propietario WHERE usuario = ? AND correo = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $usuario, $correo);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $usuario_encontrado = false;
+        $tipo_usuario = '';
+        $nombre_usuario = '';
+        $id_usuario = 0;
         
-        if ($result->num_rows === 1) {
+        // PRIMERO: Buscar en PROPIETARIOS
+        $sql_propietario = "SELECT id_propietario, nombre FROM propietario WHERE usuario = ? AND correo = ?";
+        $stmt_propietario = $conn->prepare($sql_propietario);
+        $stmt_propietario->bind_param("ss", $usuario, $correo);
+        $stmt_propietario->execute();
+        $result_propietario = $stmt_propietario->get_result();
+        
+        if ($result_propietario->num_rows === 1) {
+            $row = $result_propietario->fetch_assoc();
+            $usuario_encontrado = true;
+            $tipo_usuario = 'propietario';
+            $nombre_usuario = $row['nombre'];
+            $id_usuario = $row['id_propietario'];
+        }
+        $stmt_propietario->close();
+        
+        // SEGUNDO: Si no es propietario, buscar en VETERINARIOS
+        if (!$usuario_encontrado) {
+            $sql_veterinario = "SELECT id_veterinario, nombre FROM veterinario WHERE usuario = ? AND correo_electronico = ?";
+            $stmt_veterinario = $conn->prepare($sql_veterinario);
+            $stmt_veterinario->bind_param("ss", $usuario, $correo);
+            $stmt_veterinario->execute();
+            $result_veterinario = $stmt_veterinario->get_result();
+            
+            if ($result_veterinario->num_rows === 1) {
+                $row = $result_veterinario->fetch_assoc();
+                $usuario_encontrado = true;
+                $tipo_usuario = 'veterinario';
+                $nombre_usuario = $row['nombre'];
+                $id_usuario = $row['id_veterinario'];
+            }
+            $stmt_veterinario->close();
+        }
+        
+        if ($usuario_encontrado) {
             // Usuario y correo coinciden, guardar en sesion
-            $row = $result->fetch_assoc();
             $_SESSION['reset_usuario'] = $usuario;
-            $_SESSION['reset_nombre'] = $row['nombre'];
-            $_SESSION['reset_id'] = $row['id_propietario'];
+            $_SESSION['reset_nombre'] = $nombre_usuario;
+            $_SESSION['reset_id'] = $id_usuario;
+            $_SESSION['reset_tipo'] = $tipo_usuario; // IMPORTANTE: guardar el tipo
             
             // Mostrar formulario para nueva contraseña
             ?>
@@ -35,16 +67,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
                 <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
                 
-                <link rel="stylesheet" href="../css/stilogin.css">
-                
                 <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    
+                    body {
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                        background-color: #f4f4f5;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        min-height: 100vh;
+                        padding: 20px;
+                    }
+                    
                     .recovery-box {
                         max-width: 450px;
-                        margin: 40px auto;
+                        width: 100%;
                         background: white;
                         padding: 40px;
                         border-radius: 24px;
                         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                    }
+                    
+                    .logo {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        font-size: 20px;
+                        font-weight: 700;
+                        color: #f09e2b;
+                        margin-bottom: 30px;
+                    }
+                    
+                    .logo-icon {
+                        font-size: 24px;
                     }
                     
                     .success-icon {
@@ -59,6 +120,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         to { transform: scale(1); }
                     }
                     
+                    h1 {
+                        font-size: 28px;
+                        font-weight: 800;
+                        color: #1f2937;
+                        margin: 0 0 8px 0;
+                        text-align: center;
+                    }
+                    
+                    .subtitle {
+                        font-size: 15px;
+                        color: #6b7280;
+                        margin: 0 0 24px 0;
+                        text-align: center;
+                        line-height: 1.5;
+                    }
+                    
                     .alert {
                         padding: 12px 16px;
                         border-radius: 8px;
@@ -70,6 +147,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         background-color: #d1fae5;
                         color: #065f46;
                         border: 1px solid #6ee7b7;
+                    }
+                    
+                    .user-type-badge {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        margin-left: 8px;
+                    }
+                    
+                    .badge-propietario {
+                        background-color: #dbeafe;
+                        color: #1e40af;
+                    }
+                    
+                    .badge-veterinario {
+                        background-color: #fef3e7;
+                        color: #d97706;
+                    }
+                    
+                    .form-group {
+                        margin-bottom: 20px;
+                    }
+                    
+                    label {
+                        display: block;
+                        margin-bottom: 8px;
+                        font-weight: 600;
+                        color: #374151;
+                        font-size: 14px;
+                    }
+                    
+                    input[type="password"] {
+                        width: 100%;
+                        padding: 12px 14px;
+                        border: 1px solid #d1d5db;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        line-height: 1.5;
+                        font-family: inherit;
+                        transition: all 0.2s ease;
+                    }
+                    
+                    input[type="password"]:focus {
+                        outline: none;
+                        border-color: #f09e2b;
+                        box-shadow: 0 0 0 3px rgba(240, 158, 43, 0.1);
+                    }
+                    
+                    input::placeholder {
+                        color: #9ca3af;
                     }
                     
                     .password-tips {
@@ -86,26 +215,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         display: block;
                         margin-bottom: 8px;
                     }
+                    
+                    .btn-login {
+                        width: 100%;
+                        padding: 14px;
+                        background-color: #f09e2b;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        margin-top: 10px;
+                    }
+                    
+                    .btn-login:hover {
+                        background-color: #e69121;
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(240, 158, 43, 0.3);
+                    }
                 </style>
             </head>
             <body>
 
                 <div class="recovery-box">
                     
-                    <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+                    <div class="logo">
                         <span class="logo-icon">🐾</span>
                         Clínica Patitas Felices
                     </div>
 
                     <div class="success-icon">✅</div>
 
-                    <h1 style="text-align: center;">¡Verificación Exitosa!</h1>
-                    <p class="subtitle" style="text-align: center;">
-                        Hola <?php echo htmlspecialchars($row['nombre']); ?>, ahora puedes crear tu nueva contraseña.
+                    <h1>¡Verificación Exitosa!</h1>
+                    <p class="subtitle">
+                        Hola <?php echo htmlspecialchars($nombre_usuario); ?>
+                        <span class="user-type-badge badge-<?php echo $tipo_usuario; ?>">
+                            <?php echo $tipo_usuario === 'propietario' ? '👤 Usuario' : '⚕️ Veterinario'; ?>
+                        </span>
+                        <br>Ahora puedes crear tu nueva contraseña.
                     </p>
 
                     <div class="alert alert-success">
-                        <strong>✓ Usuario verificado</strong><br>
+                        <strong>✓ Identidad verificada</strong><br>
                         Tu identidad ha sido confirmada. Crea una contraseña segura.
                     </div>
 
@@ -182,12 +335,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['nueva_password']) && isset($_POST['confirmar_password'])) {
         
         // Verificar que haya sesion activa
-        if (!isset($_SESSION['reset_usuario'])) {
+        if (!isset($_SESSION['reset_usuario']) || !isset($_SESSION['reset_tipo'])) {
             echo "<script>alert('Sesión expirada. Intenta nuevamente.'); window.location.href='forgot_password_simple.php';</script>";
             exit();
         }
         
         $usuario = $_SESSION['reset_usuario'];
+        $tipo_usuario = $_SESSION['reset_tipo'];
         $nueva_password = $_POST['nueva_password'];
         $confirmar_password = $_POST['confirmar_password'];
         
@@ -203,16 +357,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
         
-        // Actualizar la contraseña en la base de datos
-        $sql_update = "UPDATE propietario SET password = ? WHERE usuario = ?";
-        $stmt_update = $conn->prepare($sql_update);
-        $stmt_update->bind_param("ss", $nueva_password, $usuario);
+        // Actualizar la contraseña según el tipo de usuario
+        if ($tipo_usuario === 'propietario') {
+            // Actualizar en tabla PROPIETARIO
+            $sql_update = "UPDATE propietario SET password = ? WHERE usuario = ?";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->bind_param("ss", $nueva_password, $usuario);
+        } else {
+            // Actualizar en tabla VETERINARIO
+            $sql_update = "UPDATE veterinario SET password = ? WHERE usuario = ?";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->bind_param("ss", $nueva_password, $usuario);
+        }
         
         if ($stmt_update->execute()) {
             // Limpiar sesion
             unset($_SESSION['reset_usuario']);
             unset($_SESSION['reset_nombre']);
             unset($_SESSION['reset_id']);
+            unset($_SESSION['reset_tipo']);
             
             // Mostrar pagina de exito
             ?>
@@ -226,16 +389,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <link rel="apple-touch-icon" type="image/jpg" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
                 <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/q7YcnW3s/logo.png"/>
                 
-                <link rel="stylesheet" href="../css/stilogin.css">
-                
                 <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    
+                    body {
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                        background-color: #f4f4f5;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        min-height: 100vh;
+                        padding: 20px;
+                    }
+                    
                     .recovery-box {
                         max-width: 450px;
-                        margin: 40px auto;
+                        width: 100%;
                         background: white;
                         padding: 40px;
                         border-radius: 24px;
                         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                    }
+                    
+                    .logo {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        font-size: 20px;
+                        font-weight: 700;
+                        color: #f09e2b;
+                        margin-bottom: 30px;
+                    }
+                    
+                    .logo-icon {
+                        font-size: 24px;
                     }
                     
                     .success-icon {
@@ -251,6 +443,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         75% { transform: scale(1.1) rotate(10deg); }
                     }
                     
+                    h1 {
+                        font-size: 28px;
+                        font-weight: 800;
+                        color: #1f2937;
+                        margin: 0 0 8px 0;
+                        text-align: center;
+                    }
+                    
+                    .subtitle {
+                        font-size: 15px;
+                        color: #6b7280;
+                        margin: 0 0 24px 0;
+                        text-align: center;
+                        line-height: 1.5;
+                    }
+                    
                     .alert {
                         padding: 12px 16px;
                         border-radius: 8px;
@@ -263,21 +471,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         color: #065f46;
                         border: 1px solid #6ee7b7;
                     }
+                    
+                    .btn-login {
+                        width: 100%;
+                        padding: 14px;
+                        background-color: #f09e2b;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 16px;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        text-decoration: none;
+                        display: block;
+                        text-align: center;
+                    }
+                    
+                    .btn-login:hover {
+                        background-color: #e69121;
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(240, 158, 43, 0.3);
+                    }
+                    
+                    .forgot-password {
+                        display: block;
+                        text-align: center;
+                        margin-top: 20px;
+                        color: #f09e2b;
+                        text-decoration: none;
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
                 </style>
             </head>
             <body>
 
                 <div class="recovery-box">
                     
-                    <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+                    <div class="logo">
                         <span class="logo-icon">🐾</span>
                         Clínica Patitas Felices
                     </div>
 
                     <div class="success-icon">🎉</div>
 
-                    <h1 style="text-align: center;">¡Contraseña Actualizada!</h1>
-                    <p class="subtitle" style="text-align: center;">
+                    <h1>¡Contraseña Actualizada!</h1>
+                    <p class="subtitle">
                         Tu contraseña ha sido cambiada exitosamente. Ahora puedes iniciar sesión con tu nueva contraseña.
                     </p>
 
@@ -286,11 +526,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         Tu cuenta está segura. Ya puedes iniciar sesión.
                     </div>
 
-                    <a href="index.php">
-                        <button class="btn-login">Iniciar Sesión</button>
-                    </a>
+                    <a href="index.php" class="btn-login">Iniciar Sesión</a>
 
-                    <a href="../inicio.php" class="forgot-password" style="display: block; text-align: center; margin-top: 20px;">
+                    <a href="../inicio.php" class="forgot-password">
                         ← Volver al inicio
                     </a>
                 </div>
