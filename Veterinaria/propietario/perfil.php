@@ -95,7 +95,7 @@ while ($row = mysqli_fetch_assoc($result_mascotas)) {
             <div class="pets-section">
                 <div class="pets-header">
                     <h2>Mis Mascotas</h2>
-                    <button class="btn-add-pet" onclick="alert('Funcionalidad para agregar mascota')">
+                    <button class="btn-add-pet" onclick="window.location.href='agregar_mascota.php'">
                         <i class="fas fa-plus"></i> Agregar Mascota
                     </button>
                 </div>
@@ -161,7 +161,7 @@ while ($row = mysqli_fetch_assoc($result_mascotas)) {
                     </div>
                     <?php endforeach; ?>
 
-                    <div class="add-pet-card" onclick="alert('Funcionalidad para agregar mascota')">
+                    <div class="add-pet-card" onclick="window.location.href='agregar_mascota.php'">
                         <i class="fas fa-paw"></i>
                         <h3>Agregar una nueva mascota</h3>
                         <p>Registra a tu amigo peludo para mantener su información al día.</p>

@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <div class="form-row-label">
                         <label for="password">Contraseña</label>
-                        <a href="#" class="forgot-password">¿Olvidé mi contraseña?</a>
+                        <a href="forgot_password_simple.php" class="forgot-password">¿Olvidé mi contraseña?</a>
                     </div>
                     <div class="password-wrapper">
                         <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
@@ -58,5 +58,24 @@
         </div>
 
     </div>
+
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.querySelector('.eye-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.textContent = ' X'; // Ojo cerrado
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.textContent = '👁'; // Ojo abierto
+            }
+        }
+    </script>
+</body>
+</html>
 </body>
 </html>

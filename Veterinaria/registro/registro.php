@@ -65,7 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="register-container">
         
         <div class="register-image-panel">
-            </div>
+            <img src="https://nupec.com/wp-content/uploads/2022/02/cat-watching-2021-08-26-15-42-24-utc.jpg" alt="Mascota feliz">
+        </div>
 
         <div class="register-form-panel">
             

@@ -30,7 +30,7 @@ body {
 /* --- Panel Izquierdo (Imagen) --- */
 .login-image-panel {
     flex: 1; /* Ocupa la mitad del espacio */
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzxdyQL2sWFW7evWk1C0IRGnli49KSC9_WRw&s');
+    background-image: url('https://i0.wp.com/puppis.blog/wp-content/uploads/2020/02/Labradores-grandes-en-tamano-y-en-amor.jpg?resize=900%2C600&ssl=1');
     
     /* Y AÑADE ESTO (para que se vea bien): */
     background-size: cover;

@@ -31,6 +31,15 @@ body {
     flex: 1;
     background-color: #fbeedc; /* Color crema */
     min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* --- Panel Derecho (Formulario) --- */
